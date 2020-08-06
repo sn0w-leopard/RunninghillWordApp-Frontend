@@ -2,10 +2,80 @@
     <div class="app-container">
         <div class="sidebar">
             <h1 class="title has-text-primary">Controls</h1>
+            <div class="word-type-list">
+                <!-- List of word types -->
+                <a class="word-type-item">
+                    <p>Type 1</p>
+                </a>                
+                <a class="word-type-item">
+                    <p>Type 2</p>
+                </a>
+                <a class="word-type-item">
+                    <p>Type 3</p>
+                </a>                
+                <a class="word-type-item">
+                    <p>Type 4</p>
+                </a>
+                <a class="word-type-item">
+                    <p>Type 5</p>
+                </a>                
+                <a class="word-type-item">
+                    <p>Type 6</p>
+                </a>
+                <a class="word-type-item">
+                    <p>Type 7</p>
+                </a>                
+                <a class="word-type-item">
+                    <p>Type 8</p>
+                </a>
+                <a class="word-type-item">
+                    <p>Type 9</p>
+                </a>                
+            </div>
+            <button class="button is-primary"> Save Sentence</button>
         </div>
 
         <div class="main-display-container">
-            <h1 class="title has-text-primary">Display</h1>
+            <h1 class="title has-text-primary">Sentence Display</h1>
+            
+            <!-- Display current sentence -->
+            <div class="control">
+                <textarea class="textarea .curved" readonly>This content is readonly</textarea>
+            </div>
+
+            <div class="word-select-container">
+                <!-- Available words from selected type -->
+                <div class="field">
+                    <div class="control">
+                        <div class="select is-primary">
+                        <select>
+                            <option>Select Word</option>
+                            <option>With options</option>
+                        </select>
+                        </div>
+                        <button class="button is-primary add-word">Add</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h1 class="title has-text-primary">History</h1>
+
+            <div class="history-display-container">
+                <!-- Display previous sentences -->
+                <div class="history-item">
+                    <p> This is an old sentence</p>
+                </div>
+                <div class="history-item">
+                    <p> This is an old sentence</p>
+                </div>
+                <div class="history-item">
+                    <p> This is an old sentence</p>
+                </div>
+                <div class="history-item">
+                    <p> This is an old sentence</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
