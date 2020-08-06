@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SentenceService } from '../../services/sentence.service';
 
 @Component({
   selector: 'app-display-view',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DisplayViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sentenceService: SentenceService) { }
 
   ngOnInit(): void {
+  }
+
+  saveSentence(){
+    this.sentenceService.createSentence("this is an app passed sentence").subscribe((response: any) => {
+      console.log(response);
+    });
   }
 
 }

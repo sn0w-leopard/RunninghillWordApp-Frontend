@@ -32,7 +32,7 @@
                     <p>Type 9</p>
                 </a>                
             </div>
-            <button class="button is-primary"> Save Sentence</button>
+            <button class="button is-primary" (click)="saveSentence()"> Save Sentence</button>
         </div>
 
         <div class="main-display-container">
@@ -40,7 +40,7 @@
             
             <!-- Display current sentence -->
             <div class="control">
-                <textarea class="textarea .curved" readonly>This content is readonly</textarea>
+                <textarea class="textarea .curved">This content is readonly</textarea>
             </div>
 
             <div class="word-select-container">
@@ -58,7 +58,6 @@
                 </div>
             </div>
             
-            <h1 class="title has-text-primary">History</h1>
 
             <div class="history-display-container">
                 <!-- Display previous sentences -->
@@ -71,9 +70,7 @@
                 <div class="history-item">
                     <p> This is an old sentence</p>
                 </div>
-                <div class="history-item">
-                    <p> This is an old sentence</p>
-                </div>
+                <button class="button is-primary" style="margin: auto;">View More</button>
             </div>
 
         </div>
