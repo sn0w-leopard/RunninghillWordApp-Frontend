@@ -6,10 +6,16 @@ import { WebRequestService } from './web-request.service';
 })
 export class SentenceService {
 
-  constructor(private service: WebRequestService) { }
+  constructor(private webReqService: WebRequestService) { }
 
   createSentence(text: String){
     //send web request to create a new sentence
-    return this.service.post('sentences', {text});
+    return this.webReqService.post('sentences', {text});
   }
+
+  getSentences(){
+    //send web request to get all sentences
+    return this.webReqService.get('sentences');
+  }
+  
 }

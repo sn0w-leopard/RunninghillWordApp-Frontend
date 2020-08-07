@@ -32,7 +32,7 @@
                     <p>Type 9</p>
                 </a>                
             </div>
-            <button class="button is-primary" (click)="saveSentence()"> Save Sentence</button>
+            <button class="button is-primary" (click)="saveSentence(sentenceInput.value)"> Save Sentence</button>
         </div>
 
         <div class="main-display-container">
@@ -40,7 +40,7 @@
             
             <!-- Display current sentence -->
             <div class="control">
-                <textarea class="textarea .curved">This content is readonly</textarea>
+                <textarea #sentenceInput class="textarea .curved">This content is readonly</textarea>
             </div>
 
             <div class="word-select-container">
@@ -48,8 +48,8 @@
                 <div class="field">
                     <div class="control">
                         <div class="select is-primary">
-                        <select>
-                            <option>Select Word</option>
+                        <select *ngFor="let word of words">
+                            <option>{{word.title}}</option>
                             <option>With options</option>
                         </select>
                         </div>
@@ -58,19 +58,11 @@
                 </div>
             </div>
             
-
             <div class="history-display-container">
                 <!-- Display previous sentences -->
-                <div class="history-item">
-                    <p> This is an old sentence</p>
-                </div>
-                <div class="history-item">
-                    <p> This is an old sentence</p>
-                </div>
-                <div class="history-item">
-                    <p> This is an old sentence</p>
-                </div>
-                <button class="button is-primary" style="margin: auto;">View More</button>
+                <a class="history-item" *ngFor="let item of history">
+                    <p>{{item.text}}</p>
+                </a>
             </div>
 
         </div>

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SentenceService } from '../../services/sentence.service';
+import { WordService } from '../../services/word.service';
+import { Sentence } from '../../models/sentence.model';
+import { Word } from '../../models/word.model';
+
 
 @Component({
   selector: 'app-display-view',
@@ -8,14 +13,36 @@ import { SentenceService } from '../../services/sentence.service';
 })
 export class DisplayViewComponent implements OnInit {
 
-  constructor(private sentenceService: SentenceService) { }
+  history: Sentence[];
+  words: Word[];
+
+  constructor(private sentenceService: SentenceService, private wordService: WordService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    this.route.params.subscribe(
+      (params: Params) => {
+        console.log(params);
+      }
+    )
+
+    //populate sentences and words arrays
+    this.sentenceService.getSentences().subscribe((sentences: Sentence[]) =>{
+      console.log(sentences);
+      this.history = sentences;
+    });
+
+    this.wordService.getWords().subscribe((words: Word[]) =>{
+      console.log(words);
+      this.words = words;
+    });
+
   }
 
-  saveSentence(){
-    this.sentenceService.createSentence("this is an app passed sentence").subscribe((response: any) => {
-      console.log(response);
+  saveSentence(newSentence: string){
+    //parse sentence from textbox and save to db
+    this.sentenceService.createSentence(newSentence).subscribe((response: any) => {
+      this.history = response;
     });
   }
 
