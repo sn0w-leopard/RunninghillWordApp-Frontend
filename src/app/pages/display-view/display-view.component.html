@@ -4,33 +4,9 @@
             <h1 class="title has-text-primary">Controls</h1>
             <div class="word-type-list">
                 <!-- List of word types -->
-                <a class="word-type-item">
-                    <p>Type 1</p>
-                </a>                
-                <a class="word-type-item">
-                    <p>Type 2</p>
-                </a>
-                <a class="word-type-item">
-                    <p>Type 3</p>
-                </a>                
-                <a class="word-type-item">
-                    <p>Type 4</p>
-                </a>
-                <a class="word-type-item">
-                    <p>Type 5</p>
-                </a>                
-                <a class="word-type-item">
-                    <p>Type 6</p>
-                </a>
-                <a class="word-type-item">
-                    <p>Type 7</p>
-                </a>                
-                <a class="word-type-item">
-                    <p>Type 8</p>
-                </a>
-                <a class="word-type-item">
-                    <p>Type 9</p>
-                </a>                
+                <a class="word-type-item" *ngFor="let type of types" (click)=setSelectedType(type)>
+                    {{type}}
+                </a>                            
             </div>
             <button class="button is-primary" (click)="saveSentence(sentenceInput.value)"> Save Sentence</button>
         </div>
@@ -48,21 +24,20 @@
                 <div class="field">
                     <div class="control">
                         <div class="select is-primary">
-                        <select *ngFor="let word of words">
-                            <option>{{word.title}}</option>
-                            <option>With options</option>
+                        <select #wordSelect>
+                            <option *ngFor="let word of words">{{word.title}}</option>
                         </select>
                         </div>
-                        <button class="button is-primary add-word">Add</button>
+                        <button class="button is-primary add-word" (click)="addWord()">Add</button>
                     </div>
                 </div>
             </div>
             
-            <div class="history-display-container">
+            <div class="history-display-container" >
                 <!-- Display previous sentences -->
-                <a class="history-item" *ngFor="let item of history">
+                <div class="history-item" *ngFor="let item of history">
                     <p>{{item.text}}</p>
-                </a>
+                </div>
             </div>
 
         </div>

@@ -13,8 +13,10 @@ import { Word } from '../../models/word.model';
 })
 export class DisplayViewComponent implements OnInit {
 
-  history: Sentence[];
-  words: Word[];
+  history: Sentence[] = [];
+  words: Word[] = [];
+  types: string[] = [];
+  selectedType: string = '';
 
   constructor(private sentenceService: SentenceService, private wordService: WordService, private route: ActivatedRoute) { }
 
@@ -22,21 +24,43 @@ export class DisplayViewComponent implements OnInit {
 
     this.route.params.subscribe(
       (params: Params) => {
-        console.log(params);
+        //console.log(params);
       }
-    )
+    );
 
-    //populate sentences and words arrays
-    this.sentenceService.getSentences().subscribe((sentences: Sentence[]) =>{
-      console.log(sentences);
-      this.history = sentences;
+    this.getSentences();
+    this.getWords();
+
+  }
+
+  setSelectedType(type: string){
+    //set selected word type
+    console.log(type);
+  }
+
+  getSentences(){
+    //populate sentences array
+    this.sentenceService.getSentences().subscribe((result: any) =>{
+      this.history = [...result.sentences];
     });
+  }
 
-    this.wordService.getWords().subscribe((words: Word[]) =>{
-      console.log(words);
-      this.words = words;
+  getWords(){
+    //populate words array 
+    this.wordService.getWords().subscribe((result: any) =>{
+      this.words = [...result.words];
+      this.getTypes();
     });
+  }
 
+  getTypes(){
+    //get word types from words array
+    for (let i = 0; i < this.words.length; i++) {
+      if(!this.types.includes(this.words[i].type)){
+        this.types.push(this.words[i].type);
+      }
+    }
+    this.selectedType = this.types[0];
   }
 
   saveSentence(newSentence: string){
@@ -44,6 +68,11 @@ export class DisplayViewComponent implements OnInit {
     this.sentenceService.createSentence(newSentence).subscribe((response: any) => {
       this.history = response;
     });
+  }
+
+  addWord(){
+    console.log(this.words);
+    this.getTypes();
   }
 
 }
