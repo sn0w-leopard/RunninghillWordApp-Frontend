@@ -15,7 +15,10 @@ export class DisplayViewComponent implements OnInit {
 
   history: Sentence[] = [];
   words: Word[] = [];
+  availableWords: Word[] = [];
   types: string[] = [];
+
+  sentenceText: string = '';
   selectedType: string = '';
 
   constructor(private sentenceService: SentenceService, private wordService: WordService, private route: ActivatedRoute) { }
@@ -35,7 +38,12 @@ export class DisplayViewComponent implements OnInit {
 
   setSelectedType(type: string){
     //set selected word type
-    console.log(type);
+    if (type == this.selectedType){
+      //no need to refractor since type hasn't changed
+    } else{
+    this.selectedType = type;
+    this.refractorAvailableWords();
+    }
   }
 
   getSentences(){
@@ -61,18 +69,31 @@ export class DisplayViewComponent implements OnInit {
       }
     }
     this.selectedType = this.types[0];
+    this.refractorAvailableWords();
   }
 
-  saveSentence(newSentence: string){
+  refractorAvailableWords(){
+    //set words available for use depending on type selected
+    this.availableWords = [];
+    for (let i = 0; i < this.words.length; i++) {
+      if(this.words[i].type == this.selectedType)
+      {
+        this.availableWords.push(this.words[i]);
+      }      
+    }
+  }
+
+  saveSentence(){
     //parse sentence from textbox and save to db
-    this.sentenceService.createSentence(newSentence).subscribe((response: any) => {
-      this.history = response;
+    this.sentenceService.createSentence(this.sentenceText).subscribe((response: any) => {
+      console.log(response);
+      this.getSentences();
     });
   }
 
-  addWord(){
-    console.log(this.words);
-    this.getTypes();
+  addWord(word: string){
+    this.sentenceText = this.sentenceText + " " + word;
+    //this.getTypes();
   }
 
 }

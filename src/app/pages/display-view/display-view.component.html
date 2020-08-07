@@ -8,7 +8,7 @@
                     {{type}}
                 </a>                            
             </div>
-            <button class="button is-primary" (click)="saveSentence(sentenceInput.value)"> Save Sentence</button>
+            <button class="button is-primary" (click)="saveSentence()"> Save Sentence</button>
         </div>
 
         <div class="main-display-container">
@@ -16,7 +16,7 @@
             
             <!-- Display current sentence -->
             <div class="control">
-                <textarea #sentenceInput class="textarea .curved">This content is readonly</textarea>
+                <textarea #sentenceInput class="textarea .curved" disabled placeholder="Add a new word to begin your sentence">{{sentenceText}}</textarea>
             </div>
 
             <div class="word-select-container">
@@ -25,10 +25,10 @@
                     <div class="control">
                         <div class="select is-primary">
                         <select #wordSelect>
-                            <option *ngFor="let word of words">{{word.title}}</option>
+                            <option *ngFor="let word of availableWords">{{word.title}}</option>
                         </select>
                         </div>
-                        <button class="button is-primary add-word" (click)="addWord()">Add</button>
+                        <button class="button is-primary add-word" (click)="addWord(wordSelect.value)">Add {{selectedType}}</button>
                     </div>
                 </div>
             </div>
