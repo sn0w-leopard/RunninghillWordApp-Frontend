@@ -87,13 +87,14 @@ export class DisplayViewComponent implements OnInit {
     //parse sentence from textbox and save to db
     this.sentenceService.createSentence(this.sentenceText).subscribe((response: any) => {
       console.log(response);
+      this.sentenceText = '';
       this.getSentences();
     });
   }
 
   addWord(word: string){
     this.sentenceText = this.sentenceText + " " + word;
-    //this.getTypes();
   }
 
 }
+
